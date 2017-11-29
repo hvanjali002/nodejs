@@ -8,6 +8,11 @@ var db = mongojs("contactlist", ['contactlist']);
 // })
 //
 
+app.get('/hello', function(req, res) {
+    var info = {"order_id": 3, "customer" : "Peter"};
+    res.send(info);
+})
+
 app.use(express.static(__dirname + "/public"));
 
 app.get("/contactlist", function(req, res) {
