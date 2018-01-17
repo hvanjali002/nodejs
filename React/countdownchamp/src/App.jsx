@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import Clock from './Clock.jsx';
+import { Form , FormControl, Button } from 'react-bootstrap';
 
 class App extends Component {
     constructor(props) {
@@ -10,6 +12,13 @@ class App extends Component {
         }
     }
 
+    // The golden rule of React: never mutate state directly. 
+    //I can’t repeat this enough. 
+    //In order to change your state data, 
+    //you can’t manipulate it like you would with normal variables. 
+    //For example, something like `x++` or `counter += 1` would be fine in any other case. 
+    // But in order to update state, 
+    // you must use the setState() function and have new instances of data.
     changeDeadline() {
         console.log(this.state);
         this.setState({
@@ -22,22 +31,17 @@ class App extends Component {
         return (
             <div className="App">
                 <div className="App-title">Countdown to {this.state.deadline}</div>
-                <div>
-                    <div className='App-days'>14 days</div>
-                    <div className='App-hours'>30 hours</div>
-                    <div className='App-minutes'>15 minutes</div>
-                    <div className='App-seconds'>20 seconds</div>
-                </div>
-                <div>
-                    <input placeholder="new data" onChange={
+                <Clock deadline={this.state.deadline} />
+                <Form inline>
+                    <FormControl placeholder="new data" className='Deadline-input' onChange={
                         (event) => {
                             this.setState({
                                 newDeadline : event.target.value
                             });
                         }
                     }/>
-                    <button onClick={()=>this.changeDeadline()}>Submit</button>
-                </div>
+                    <Button onClick={()=>this.changeDeadline()}>Submit</Button>
+                </Form>
             </div>
             
         );
