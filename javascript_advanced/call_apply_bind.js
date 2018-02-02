@@ -71,11 +71,15 @@ var aism3 = {
 
     checkThis : function() {
         // 'use strict';
+        // always aism3
         console.log(this);
-        // 2nd
+        // always true;
         console.log(this === aism3);
 
         var checkThis2 = function() {
+            // if using bind, this === aism3.
+            // if 'use strict', exception(Cannot set property 'info' of undefined)
+            // if no binding, no use strict. this === window.
             console.log(this);
             this.info = "checkThis2";
         }.bind(this);
